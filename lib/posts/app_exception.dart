@@ -7,4 +7,12 @@ class AppException implements Exception {
 
 class UnknownException extends AppException {}
 
-class CartProductsLimitException extends AppException {}
+class PostNotFoundException extends AppException {}
+
+class PostCreationException extends AppException {}
+
+class PostUpdateException extends AppException {}
+
+class EmptyPostException extends AppException {}
+
+class InvalidPostDataException extends AppException {}
