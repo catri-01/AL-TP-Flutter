@@ -17,12 +17,14 @@ class PostsRepository {
     return _fakePosts;
   }
   @override
-  Future<Post> createPost(Post postToAdd) async {
+  Future<void> createPost(Post postToAdd) async {
+    await postsDataSource.createPost(postToAdd);
     await Future.delayed(const Duration(seconds: 1));
     /// Add the post to the list
   }
   @override
-  Future<Post> updatePost(Post newPost) async {
+  Future<void> updatePost(Post newPost) async {
+    await postsDataSource.updatePost(newPost);
     await Future.delayed(const Duration(seconds: 1));
     /// Update the post in the list
   }
