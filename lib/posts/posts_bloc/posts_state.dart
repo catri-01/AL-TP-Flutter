@@ -5,6 +5,15 @@ enum PostsStatus {
   loading,
   success,
   error,
+  fetchingPosts,
+  creatingPosts,
+  updatingPost,
+  fetchedPosts,
+  createdPost,
+  updatedPost,
+  errorFetchingPosts,
+  errorCreatingPost,
+  errorUpdatingPost
 }
 
 class PostsState {

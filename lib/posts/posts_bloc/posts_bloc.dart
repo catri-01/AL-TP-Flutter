@@ -20,14 +20,37 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
   }
 
   void _getAllPosts(event, emit) async {
+    emit(state.copyWith(status: PostsStatus.fetchingPosts));
 
+    try {
+      final postsStream = postsRepository.getAllPosts();
+      await emit.forEach(postsStream, onData: (posts) {
+        return state.copyWith(status: PostsStatus.fetchedPosts, posts: posts);
+      });
+    } catch (error) {
+      emit(state.copyWith(status: PostsStatus.errorFetchingPosts));
+    }
   }
 
   void _createPost(event, emit) async {
+    emit(state.copyWith(status: PostsStatus.creatingPosts));
 
+    try {
+      await postsRepository.createPost(event.post);
+      emit(state.copyWith(status: PostsStatus.createdPost));
+    } catch (error) {
+      emit(state.copyWith(status: PostsStatus.errorCreatingPost));
+    }
   }
 
   void _updatePost(event, emit) async {
+    emit(state.copyWith(status: PostsStatus.updatingPost));
 
+    try {
+      await postsRepository.updatePost(event.post);
+      emit(state.copyWith(status: PostsStatus.updatedPost));
+    } catch (error) {
+      emit(state.copyWith(status: PostsStatus.errorUpdatingPost));
+    }
   }
 }
